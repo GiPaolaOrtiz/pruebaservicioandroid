@@ -30,32 +30,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 app.use(express.static('public'));
 app.use(permitirCrossDomain);
-app.get('/listarCuentoPorUsuario/:id', (req, res) => {
-   
-    var client = new pg.Client(conString);
-    client.connect(function(err) {
-        if(err) {
-            return console.error('could not connect to postgres', err);
-            return res.status(500).json({success: false, data: err});
-        }
-       
-        client.query('SELECT * FROM cuento WHERE idusuario='+ req.params.id +';', function(err, result) {
-            if(err) {
-                return console.error('error running query', err);
-            }
-            
-            //console.log(result);
-            client.end();
-            return res.json(result.rows);
-            
-           
-        });
-        
-    });
-    
-   
-});
-
 
 
 app.get('/listarUsuarios', (req, res, next) => {

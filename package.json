@@ -1,6 +1,6 @@
 {
-  "name": "Prueba1",
-  "description": "Servidor para pagina de cuentos",
+  "name": "androidprueba",
+  "description": "Servidor",
   "version": "1.0.0",
   "main": "app.js",
   
