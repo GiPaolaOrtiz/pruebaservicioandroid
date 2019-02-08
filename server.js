@@ -52,7 +52,30 @@ app.get('/listarUsuarios', (req, res, next) => {
     });
 });
 
+app.get('/mostrarIdporUsuario/:usuario',(req,res)=>{
+    var client = new pg.Client(conString);
+    var usuario=req.params.usuario;
+   
+    client.connect(function(err) {
+       if(err) {
+           return console.error('could not connect to postgres', err);
+           return res.status(500).json({success: false, data: err});
+       }
 
+       client.query("SELECT idusuario FROM usuario WHERE usuario='" + usuario + "';", function(err, result) {
+           if(err) {
+               return console.error('error running query', err);
+           }
+           
+           //console.log(result);
+            client.end();
+           return res.json(result.rows);
+       
+       });
+       
+   });
+
+});
 
 //Usuario para actualizar y eliminar
 app.get('/mostrarUsuario/:id',(req,res)=>{
